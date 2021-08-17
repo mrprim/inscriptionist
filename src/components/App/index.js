@@ -1,9 +1,9 @@
-import Glyph from '../Glyph'
+import LineTest from '../LineTest'
 import './index.scss'
 
 const App = () =>
   <div className='App'>
-    <Glyph />
+    <LineTest />
   </div>
 
 export default App
