@@ -1,0 +1,22 @@
+.Player {
+  text-align: center;
+
+  .preview .glyph {
+    display:inline-block;
+    padding: 0 2px;
+
+    &.past {
+      background-color: #DDF7F3;
+    }
+
+    &.present {
+      background-color: #6CD0FF;
+    }
+
+    > canvas {
+      width: 40px;
+      height: 40px;  
+    }
+
+  }
+}

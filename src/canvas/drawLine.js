@@ -1,9 +1,12 @@
-const drawLine = (context, path, startFrame, currentFrame, duration) => {
-  if (currentFrame < startFrame) return
+import { linear } from '../animation/easing'
 
-  const step = currentFrame - startFrame
+const drawLine = (context, start, path, frame, duration, easing = linear) => {
+  if (frame < start) return
+
+  const step = frame - start < duration ? frame - start : duration
+
   const totalLength = getDistance(path)
-  const currentTravel = step / duration * totalLength
+  const currentTravel = easing(step, duration) * totalLength
   let soFar = 0
 
   context.beginPath()
