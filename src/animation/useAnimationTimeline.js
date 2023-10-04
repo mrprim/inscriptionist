@@ -1,12 +1,15 @@
 import { useCallback, useEffect, useState } from 'react'
 
-const useFrames = ({ autostart = true }) => {
+const useFrames = ({ length = 100, loop = false, autostart = true }) => {
   const [frame, setFrame] = useState(0)
   const [running, setRunning] = useState(autostart)
 
   const play = useCallback(() => {
+    if (frame > length) {
+      setFrame(0)
+    }
     setRunning(true)
-  }, [setRunning])
+  }, [frame, length, setRunning])
 
   const stop = useCallback(() => {
     setRunning(false)
@@ -18,13 +21,21 @@ const useFrames = ({ autostart = true }) => {
 
   useEffect(() => {
     if (!running) return
+    if (frame > length) {
+      if (loop) {
+        setFrame(0)
+      } else {
+        setRunning(false)
+        return
+      }
+    }
     setTimeout(() => setFrame(t => {
       if (frame !== t) return t
       return t + 1
     }), 1000 / 24)
-  }, [setFrame, frame, running])
+  }, [setFrame, frame, running, setRunning, length, loop])
 
-  return { frame, setFrame, running, play, stop, reset }
+  return { frame, setFrame, running, play, stop, reset, length }
 }
 
 export default useFrames

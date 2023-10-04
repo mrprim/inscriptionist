@@ -1,5 +1,9 @@
-.Player {
+.player {
   text-align: center;
+
+  .view {
+    position: relative;
+  }
 
   .preview .glyph {
     display:inline-block;
